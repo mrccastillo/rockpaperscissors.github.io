@@ -5,6 +5,7 @@
 
 body {
     height: 100vh;
+    background-color: rgb(244, 244, 244);
 }
 
 .player-container {
@@ -18,7 +19,7 @@ body {
 .computer-side {
     width: 49%;
     height: 100%;
-    background-color: aqua;
+    /* background-color: aqua; */
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -27,29 +28,89 @@ body {
 img {
     width: 15rem;
     height: 15rem;
-    background-color: rgb(120, 153, 182);
+    /* background-color: rgb(255, 255, 255); */
 }
 
 .pick-and-scores-wrapper {
     height: 20%;
     display: flex;
-    background-color: bisque;
+    border-top: 1px solid black;
+    background-color: rgb(80, 105, 180);
+    /* background-color: bisque; */
 }
 
 .choices-container,
 .scores-container {
     width: 50%;
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.5em;
 }
 
 .img-choices {
     width: 6rem;
     height: 6rem;
+    cursor: pointer;
+    transition: all 200ms;
+}
+
+.img-choices:active {
+    transform: scale(0.95);
+}
+
+.game-results {
+    position: absolute;
+    top: 65%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgb(255, 255, 255);
+    width: 14rem;
+    height: 5rem;
+    padding: 1.2rem 0;
+    box-shadow: 0 0.3rem 0.5rem 2px rgb(217, 217, 217);
+}
+
+h1 {
+    text-align: center;
+}
+
+.initial-modal {
+    background-color: rgb(255, 255, 255);
+    width: 23rem;
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 5rem 1.5rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    border-radius: 0.3rem;
+}
+
+.inputs {
+    width: 100%;
+    line-height: 3rem;
+    border: 1px solid black;
+    border-radius: 0.5em;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    transition: all 0.5s;
 }
 
 .hidden {
