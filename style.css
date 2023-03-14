@@ -1,0 +1,57 @@
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+}
+
+.player-container {
+    height: 80%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.player-side,
+.computer-side {
+    width: 49%;
+    height: 100%;
+    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+img {
+    width: 15rem;
+    height: 15rem;
+    background-color: rgb(120, 153, 182);
+}
+
+.pick-and-scores-wrapper {
+    height: 20%;
+    display: flex;
+    background-color: bisque;
+}
+
+.choices-container,
+.scores-container {
+    width: 50%;
+    background-color: blueviolet;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.5rem;
+}
+
+.img-choices {
+    width: 6rem;
+    height: 6rem;
+}
+
+.hidden {
+    display: none;
+}
