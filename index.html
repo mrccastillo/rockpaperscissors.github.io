@@ -22,18 +22,25 @@
     </div>
     <div class="pick-and-scores-wrapper">
         <div class="choices-container">
-            <img src="images/item-1.jpg" class="img-choices" id="rock" alt="">
-            <img src="images/item-2.jpg" class="img-choices" id="paper" alt="">
-            <img src="images/item-3.jpg" class="img-choices" id="scissors" alt="">
+            <img src="images/item-1.png" class="img-choices" id="rock" alt="">
+            <img src="images/item-2.png" class="img-choices" id="paper" alt="">
+            <img src="images/item-3.png" class="img-choices" id="scissors" alt="">
         </div>
         <div class="scores-container">
-            <p>Player Score: <span>0</span></p>
-            <p>Computer Score: <span>0</span></p>
+            <p>Player Score: <span id="p-score">0</span></p>
+            <p>Computer Score: <span id="comp-score">0</span></p>
         </div>
     </div>
-    <div class="game-results">
+    <div class="game-results hidden">
         <h1 id=game-results-display>Player won</h1>
     </div>
+    <div class="initial-modal">
+        <h2>ROCK PAPER SCISSORS</h2>
+        <input type="text" placeholder="Enter Your Name" class="inputs">
+        <input type="number" placeholder="Best of?" class="inputs" id="rounds" value="">
+        <button id="play-game-btn">Play Game</button>
+    </div>
+    <div class="overlay"></div>
     <script src="script.js"></script>
 </body>
 
