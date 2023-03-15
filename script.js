@@ -8,8 +8,8 @@ let pName;
 const playBtn = document.getElementById('play-game-btn');
 const rounds = document.querySelector('#rounds');
 const domPname = document.querySelector('#name');
-const domPlayerName = document.querySelector('#player-name');
-playBtn.addEventListener('click', function () {
+
+function roundAndName() {
     if (!rounds.value) {
         alert('Please input how many rounds you are going to play');
     }
@@ -25,7 +25,9 @@ playBtn.addEventListener('click', function () {
     else {
         domPlayerName.textContent = pName;
     }
-});
+}
+const domPlayerName = document.querySelector('#player-name');
+playBtn.addEventListener('click', roundAndName);
 
 //powerful and most advanced ai for rock paper scissor
 const pScore = document.getElementById('p-score');
@@ -35,7 +37,8 @@ const compPickImage = document.getElementById('comp-pick-img');
 const gameRes = document.querySelector('.game-results');
 
 let results = function computerPick() {
-    if (playerScore <= gameRounds || computerScore <= gameRounds) {
+    //if the player or computer still doesn't meet the condition to win 
+    if (computerScore < gameRounds && playerScore < gameRounds) {
         let rand = Math.floor(Math.random() * 3) + 1;
         compPickImage.src = `images/item-${rand}.png`;
 
@@ -43,34 +46,28 @@ let results = function computerPick() {
         if (rand === 3 && playerPick === 1) {
             document.querySelector('#game-results-display').textContent = 'Player Won';
             playerScore += 1;
-            // return 'player won';
         }
         else if (rand === 2 && playerPick === 1) {
             document.querySelector('#game-results-display').textContent = 'Player Lost';
             computerScore += 1;
-            // return 'player lost';
         }
         //paper
         else if (rand === 1 && playerPick === 2) {
             document.querySelector('#game-results-display').textContent = 'Player Won';
             playerScore += 1;
-            // return 'player won';
         }
         else if (rand === 3 && playerPick === 2) {
             document.querySelector('#game-results-display').textContent = 'Player Lost';
             computerScore += 1;
-            // return 'player lost';
         }
         //scissors
         else if (rand === 2 && playerPick === 3) {
             document.querySelector('#game-results-display').textContent = 'Player Won';
             playerScore += 1;
-            // return 'player won';
         }
         else if (rand === 1 && playerPick === 3) {
             document.querySelector('#game-results-display').textContent = 'Player Lost';
             computerScore += 1;
-            // return 'player lost';
         }
         else {
             document.querySelector('#game-results-display').textContent = 'Draw';
@@ -79,8 +76,17 @@ let results = function computerPick() {
         compScore.textContent = computerScore;
         console.log('Round ' + roundCount);
         gameRes.classList.remove('hidden');
+        console.log(playerScore)
+        console.log(computerScore)
+        console.log(gameRounds)
     }
     else {
+        if (playerScore === gameRounds) {
+            document.getElementById('game-winner-result').textContent = 'Player Won'
+        }
+        else {
+            document.getElementById('game-winner-result').textContent = 'Computer Won'
+        }
         document.querySelector('.winner-modal').classList.remove('hidden');
         document.querySelector('.overlay').classList.remove('hidden');
         console.log('round ended')
@@ -114,3 +120,25 @@ scissorsBtn.addEventListener('click', function () {
     results();
     roundCount++;
 })
+
+//Play Again
+const playAgainBtn = document.querySelector('#play-again-btn');
+playAgainBtn.addEventListener('click', function playAgainFunc() {
+    //scores reset
+    playerScore = 0;
+    computerScore = 0;
+    pScore.textContent = playerScore;
+    compScore.textContent = computerScore;
+    document.querySelector('.winner-modal').classList.add('hidden');
+    document.querySelector('.overlay').classList.add('hidden');
+
+    //name and round number reset
+    gameRounds = 0;
+    roundCount = 0
+    document.querySelector('.initial-modal').classList.remove('hidden');
+    document.querySelector('.overlay').classList.remove('hidden');
+
+    //images reset
+    compPickImage.src = '';
+    playerPickImage.src = '';
+});
