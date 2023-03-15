@@ -12,7 +12,6 @@ body {
     height: 80%;
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
 }
 
 .player-side,
@@ -114,6 +113,59 @@ h1 {
     transition: all 0.5s;
 }
 
+button {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(80, 105, 180);
+    background-color: rgb(179, 198, 255);
+    cursor: pointer;
+    transition: all 200ms;
+}
+
+button:hover {
+    background-color: rgb(149, 169, 229);
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
 .hidden {
     display: none;
+}
+
+@media (max-width: 719px) {
+    .player-container {
+        flex-direction: column;
+    }
+
+    .player-side,
+    .computer-side {
+        flex: 1;
+        width: 100%;
+    }
+
+    .game-results {
+        position: absolute;
+        top: 35%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 11rem;
+        height: 5rem;
+    }
+
+    .img-choices {
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    img {
+        width: 9rem;
+        height: 9rem;
+    }
+
+    .scores-container>p {
+        font-size: 0.6rem;
+        align-items: center;
+    }
 }
