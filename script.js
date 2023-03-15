@@ -143,8 +143,8 @@ playAgainBtn.addEventListener('click', function playAgainFunc() {
     document.querySelector('.overlay').classList.remove('hidden');
 
     //images reset
-    compPickImage.src = '';
-    playerPickImage.src = '';
+    compPickImage.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png';
+    playerPickImage.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Question_mark_%28black%29.svg/800px-Question_mark_%28black%29.svg.png';
 
     //
     document.getElementById('game-results-display').textContent = 'Round Winner';
