@@ -1,207 +1,151 @@
-* {
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Archivo Black', sans-serif;
-}
+//score counter
+let playerScore = 0;
+let computerScore = 0;
+let gameRounds = 0;
+let roundCount = 0;
+let pName;
+//initialization of names and rounds
+const playBtn = document.getElementById('play-game-btn');
+const rounds = document.querySelector('#rounds');
+const domPname = document.querySelector('#name');
 
-body {
-    height: 100vh;
-    background-color: rgb(244, 244, 244);
-}
-
-.player-container {
-    height: 80%;
-    display: flex;
-    justify-content: space-between;
-}
-
-.player-side,
-.computer-side {
-    width: 49%;
-    height: 100%;
-    /* background-color: aqua; */
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.player-side>h2,
-.computer-side>h2 {
-    font-size: 1.7rem;
-}
-
-img {
-    width: 15rem;
-    height: 15rem;
-    /* background-color: rgb(255, 255, 255); */
-}
-
-.pick-and-scores-wrapper {
-    height: 20%;
-    display: flex;
-    border-top: 1px solid black;
-    background-color: rgb(80, 105, 180);
-    padding: 0 1rem;
-    /* background-color: bisque; */
-}
-
-.choices-container,
-.scores-container {
-    width: 50%;
-    /* background-color: blueviolet; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    font-size: 1.5em;
-}
-
-.img-choices {
-    width: 6rem;
-    height: 6rem;
-    cursor: pointer;
-    transition: all 200ms;
-}
-
-.img-choices:active {
-    transform: scale(0.95);
-}
-
-.game-results {
-    position: absolute;
-    top: 65%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: rgb(255, 255, 255);
-    min-width: 14rem;
-    min-height: 5rem;
-    padding: 1.2rem 1rem;
-    box-shadow: 0 0.3rem 0.5rem 2px rgb(217, 217, 217);
-    text-align: center;
-}
-
-h2 {
-    text-align: center;
-    font-size: 1.2rem;
-}
-
-.initial-modal,
-.winner-modal {
-    background-color: rgb(255, 255, 255);
-    width: 21rem;
-    height: 25rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 5rem 1.5rem;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    border-radius: 0.3rem;
-}
-
-.inputs {
-    width: 100%;
-    line-height: 3rem;
-    border: 1px solid black;
-    border-radius: 0.5em;
-}
-
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(4px);
-    z-index: 100;
-    transition: all 0.5s;
-}
-
-button {
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    border: 1px solid rgb(80, 105, 180);
-    background-color: rgb(179, 198, 255);
-    cursor: pointer;
-    transition: all 200ms;
-}
-
-button:hover {
-    background-color: rgb(149, 169, 229);
-}
-
-button:active {
-    transform: scale(0.95);
-}
-
-p {
-    font-family: 'Open Sans', sans-serif;
-}
-
-.defeat {
-    background-color: rgba(255, 127, 127, 0.671);
-}
-
-.victory {
-    background-color: rgba(127, 255, 138, 0.671);
-}
-
-.hidden {
-    display: none;
-}
-
-@media (max-width: 719px) {
-    .player-container {
-        flex-direction: column;
+function roundAndName() {
+    if (!rounds.value) {
+        alert('Please input how many rounds you are going to play');
     }
-
-    .player-side,
-    .computer-side {
-        flex: 1;
-        width: 100%;
+    else {
+        document.querySelector('.initial-modal').classList.add('hidden');
+        document.querySelector('.overlay').classList.add('hidden');
     }
-
-    .player-side>h2,
-    .computer-side>h2 {
-        font-size: 1.1rem;
+    gameRounds += Number(rounds.value);
+    pName = domPname.value;
+    if (!pName) {
+        domPlayerName.textContent = 'Player 1'
     }
-
-    .game-results {
-        position: absolute;
-        top: 33%;
-        left: 50%;
-        transform: translateX(-50%);
-        min-width: 11rem;
-        font-size: 64%;
-    }
-
-    .img-choices {
-        width: 3.5rem;
-        height: 3.5rem;
-    }
-
-    img {
-        width: 9rem;
-        height: 9rem;
-    }
-
-    .scores-container>p {
-        font-size: 50%;
-        align-items: center;
-    }
-
-    .pick-and-scores-wrapper {
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-    }
-
-    .scores-container {
-        flex-wrap: wrap;
+    else {
+        domPlayerName.textContent = pName;
     }
 }
+const domPlayerName = document.querySelector('#player-name');
+playBtn.addEventListener('click', roundAndName);
+
+//powerful and most advanced ai for rock paper scissor
+const pScore = document.getElementById('p-score');
+const compScore = document.getElementById('comp-score');
+
+const compPickImage = document.getElementById('comp-pick-img');
+const gameRes = document.querySelector('.game-results');
+
+let results = function computerPick() {
+    //if the player or computer still doesn't meet the condition to win 
+    if (computerScore < gameRounds && playerScore < gameRounds) {
+        let rand = Math.floor(Math.random() * 3) + 1;
+        compPickImage.src = `images/item-${rand}.png`;
+
+        //rock
+        if (rand === 3 && playerPick === 1) {
+            document.querySelector('#game-results-display').textContent = 'Player Won';
+            playerScore += 1;
+        }
+        else if (rand === 2 && playerPick === 1) {
+            document.querySelector('#game-results-display').textContent = 'Player Lost';
+            computerScore += 1;
+        }
+        //paper
+        else if (rand === 1 && playerPick === 2) {
+            document.querySelector('#game-results-display').textContent = 'Player Won';
+            playerScore += 1;
+        }
+        else if (rand === 3 && playerPick === 2) {
+            document.querySelector('#game-results-display').textContent = 'Player Lost';
+            computerScore += 1;
+        }
+        //scissors
+        else if (rand === 2 && playerPick === 3) {
+            document.querySelector('#game-results-display').textContent = 'Player Won';
+            playerScore += 1;
+        }
+        else if (rand === 1 && playerPick === 3) {
+            document.querySelector('#game-results-display').textContent = 'Player Lost';
+            computerScore += 1;
+        }
+        else {
+            document.querySelector('#game-results-display').textContent = 'Draw';
+        }
+        pScore.textContent = playerScore;
+        compScore.textContent = computerScore;
+        console.log('Round ' + roundCount);
+        gameRes.classList.remove('hidden');
+        console.log(playerScore)
+        console.log(computerScore)
+        console.log(gameRounds)
+    }
+    else {
+        if (playerScore === gameRounds) {
+            document.getElementById('game-winner-result').textContent = 'Player Won'
+            document.querySelector('.winner-modal').classList.remove('defeat');
+            document.querySelector('.winner-modal').classList.add('victory');
+        }
+        else {
+            document.getElementById('game-winner-result').textContent = 'Computer Won'
+            document.querySelector('.winner-modal').classList.remove('victory');
+            document.querySelector('.winner-modal').classList.add('defeat');
+        }
+        document.querySelector('.winner-modal').classList.remove('hidden');
+        document.querySelector('.overlay').classList.remove('hidden');
+        console.log('round ended')
+    }
+}
+
+//for the player pick
+const playerPickImage = document.getElementById('player-pick-img');
+const rockBtn = document.querySelector('#rock');
+const paperBtn = document.querySelector('#paper');
+const scissorsBtn = document.querySelector('#scissors');
+let playerPick;
+
+rockBtn.addEventListener('click', function () {
+    playerPickImage.src = 'images/item-1.png'
+    playerPick = 1;
+    results();
+    roundCount++;
+})
+
+paperBtn.addEventListener('click', function () {
+    playerPickImage.src = 'images/item-2.png'
+    playerPick = 2;
+    results();
+    roundCount++;
+})
+
+scissorsBtn.addEventListener('click', function () {
+    playerPickImage.src = 'images/item-3.png'
+    playerPick = 3;
+    results();
+    roundCount++;
+})
+
+//Play Again
+const playAgainBtn = document.querySelector('#play-again-btn');
+playAgainBtn.addEventListener('click', function playAgainFunc() {
+    //scores reset
+    playerScore = 0;
+    computerScore = 0;
+    pScore.textContent = playerScore;
+    compScore.textContent = computerScore;
+    document.querySelector('.winner-modal').classList.add('hidden');
+    document.querySelector('.overlay').classList.add('hidden');
+
+    //name and round number reset
+    gameRounds = 0;
+    roundCount = 0
+    document.querySelector('.initial-modal').classList.remove('hidden');
+    document.querySelector('.overlay').classList.remove('hidden');
+
+    //images reset
+    compPickImage.src = '';
+    playerPickImage.src = '';
+
+    //
+    document.getElementById('game-results-display').textContent = 'Round Winner';
+});
