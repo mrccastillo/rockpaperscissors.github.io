@@ -83,9 +83,13 @@ let results = function computerPick() {
     else {
         if (playerScore === gameRounds) {
             document.getElementById('game-winner-result').textContent = 'Player Won'
+            document.querySelector('.winner-modal').classList.remove('defeat');
+            document.querySelector('.winner-modal').classList.add('victory');
         }
         else {
             document.getElementById('game-winner-result').textContent = 'Computer Won'
+            document.querySelector('.winner-modal').classList.remove('victory');
+            document.querySelector('.winner-modal').classList.add('defeat');
         }
         document.querySelector('.winner-modal').classList.remove('hidden');
         document.querySelector('.overlay').classList.remove('hidden');
@@ -141,4 +145,7 @@ playAgainBtn.addEventListener('click', function playAgainFunc() {
     //images reset
     compPickImage.src = '';
     playerPickImage.src = '';
+
+    //
+    document.getElementById('game-results-display').textContent = 'Round Winner';
 });
