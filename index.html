@@ -37,11 +37,12 @@
     <div class="initial-modal">
         <h2>ROCK PAPER SCISSORS</h2>
         <input type="text" placeholder="Enter Your Name" class="inputs" id="name">
-        <input type="number" placeholder="Best of?" class="inputs" id="rounds" value="">
+        <input type="number" placeholder="Best of?" class="inputs" id="rounds" min="1" max="10" value="">
         <button id="play-game-btn">Play Game</button>
     </div>
     <div class="winner-modal hidden">
-        <h2>Game Winner</h2>
+        <h2 id="game-winner-result">Game Winner</h2>
+        <button id="play-again-btn">Play Again?</button>
     </div>
     <div class="overlay"></div>
     <script src="script.js"></script>
